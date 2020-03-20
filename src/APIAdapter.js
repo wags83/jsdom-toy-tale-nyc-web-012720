@@ -1,14 +1,12 @@
 class APIAdapter {
   constructor(baseURL){
     this.baseURL = baseURL
-    this.POSTHEADER = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
+    this.headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+     }
     }
-  }
+
 
   async getAll(endpoint){
     const response = await fetch(`${this.baseURL}${endpoint}`)
@@ -19,8 +17,11 @@ class APIAdapter {
   async post(endpoint, body){
     console.log(body)
     let response = await fetch(`${this.baseURL}${endpoint}`,
-    {...this.POSTHEADER, body: JSON.stringify(body)}
-    )
+      {
+        method: "POST",
+        headers: this.headers,
+        body
+      })
     return response.json()
   }
 
