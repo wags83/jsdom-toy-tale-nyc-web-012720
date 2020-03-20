@@ -1,5 +1,5 @@
 let addToy = false;
-
+let ADAPTER = new APIAdapter('http://localhost:3000/')
 document.addEventListener('DOMContentLoaded', () => {
 	const addBtn = document.querySelector('#new-toy-btn');
 	const toyForm = document.querySelector('.container');
@@ -19,15 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	bindLikeClickListener();
 });
 
-function loadToys() {
-	fetch('http://localhost:3000/toys')
-		.then(response => response.json())
-		.then(result =>
-			result.forEach(element => {
+async function loadToys() {
+ let result = await ADAPTER.getAll("toys")
+	result.forEach(element => {
 				makeToyCard(element);
 			})
-		);
-}
+	}
 
 function makeToyCard(toyObject) {
 	// eslint-disable-next-line unicorn/prefer-query-selector
@@ -43,28 +40,19 @@ function makeToyCard(toyObject) {
 	toyCollection.append(toyDiv);
 }
 
-function addNewToy() {
+async function addNewToy() {
 	const newForm = document.querySelectorAll('.add-toy-form')[0];
-	newForm.addEventListener('submit', function() {
-		const configObject = {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json'
-			},
-			body: JSON.stringify({
+	newForm.addEventListener('submit', function(e) {
+		e.preventDefault()
+
+			let body = {
 				name: newForm.name.value,
 				image: newForm.image.value,
 				likes: '0'
-			})
-		};
-
-		fetch('http://localhost:3000/toys', configObject)
-			.then(function(response) {
-				response.json();
-			})
-			.then(result => console.log(result));
-	});
+			}
+			let result = await ADAPTER.post("toys", body)
+			 console.log(result)
+		})
 }
 
 // function addLike() {
@@ -120,7 +108,7 @@ function bindLikeClickListener() {
 
 			// start a spinner
 			const json = await patchToyLikes(id, parseInt(likes));
-			console.log(json);
+			// console.log(json);
 			// stop spinner
 			event.target.parentNode.querySelector('p').textContent++;
 		}
