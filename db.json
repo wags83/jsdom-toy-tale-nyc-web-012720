@@ -10,7 +10,7 @@
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 11
+      "likes": 13
     },
     {
       "id": 3,
@@ -53,6 +53,24 @@
       "image": "https://cdn.shopify.com/s/files/1/0704/5013/products/board-games-the-settlers-of-catan-1_800x.jpg?v=1537041278",
       "likes": "16",
       "id": 9
+    },
+    {
+      "id": 10
+    },
+    {
+      "id": 11
+    },
+    {
+      "id": 12
+    },
+    {
+      "id": 13
+    },
+    {
+      "name": "Komal",
+      "image": "https://www.udiscovermusic.com/wp-content/uploads/2018/03/Coleman-Hawkins-Three-Deuces-July-1947-2-cropped-web-optimised-740.jpg",
+      "likes": "0",
+      "id": 14
     }
   ]
 }
